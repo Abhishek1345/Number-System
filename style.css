@@ -1,0 +1,11 @@
+#ans{
+  border-radius:10px;
+  width:150px;
+  height:10px;
+  }
+ div{
+    width:80px;
+    height:40px;
+    text-align:center;
+    display:none;
+    }

@@ -1,4 +1,3 @@
-
 function alertDiv(id){
   document.getElementById(id).style.display="block";
   
@@ -37,10 +36,27 @@ this.generate=function(){
     }
     }
     
+    function Oct(){
+      this.base=8;
+      }
+      function Hex(){
+        this.base=16;
+        }
+    
     function checkAns(){
      
           
        }
+       function getType(){
+         var url=new URL(window.location.href);
+         var type=url.searchParams.get("Type");
+         if(type==null || type.equalsIgnoreCase("Bin"))
+         return new Bin();
+         else if(type.equalsIgnoreCase("Oct"))
+         return new Oct();
+         else if(type.equalsIgnoreCase("Hex"))
+         return new Hex();
+         }
        
        (function generateSums(Type){
          var b=Type;
@@ -55,4 +71,4 @@ this.generate=function(){
              li.appendChild(ques);
              ul.appendChild(li);
              }
-             })(new Bin());
+             })(getType());

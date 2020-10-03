@@ -1,11 +1,23 @@
-#ans{
+input{
   border-radius:10px;
   width:150px;
-  height:10px;
+  height:30px;
+  margin-left:25px;
+  margin-bottom:20px;
+  caret-color:purple;
+  
   }
+  input:focus{
+    box-shadow:2px 3px 4px rgb(100,100,100);
+    outline:none;
+    }
  div{
     width:80px;
-    height:40px;
+    height:35px;
     text-align:center;
     display:none;
+    margin-left:25px;
     }
+    #refresh{
+      margin:25px;
+      }  

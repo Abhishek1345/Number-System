@@ -99,6 +99,7 @@ function Btn(){
   this.div;
   this.butt=document.createElement("button");
   this.butt.innerHTML="check";
+  this.butt.id="check";
   this.butt.className="btn btn-outline-info";
   
   this.butt.onclick=()=>{

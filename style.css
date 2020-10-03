@@ -11,7 +11,7 @@ input{
     box-shadow:2px 3px 4px rgb(100,100,100);
     outline:none;
     }
- div{
+ #result{
     width:80px;
     height:35px;
     text-align:center;
@@ -20,4 +20,26 @@ input{
     }
     #refresh{
       margin:25px;
-      }  
+      }
+      #options{
+        width:300x;
+        height:100px;
+        background:rgb(33,36,41);
+        display:none;
+        
+        }
+        i{
+        
+        margin-left:10px;
+        float:left;
+        font-size:30px;
+        
+        }
+        #op{
+          color:white;
+          text-align:center;
+          
+          }
+        #op:hover{
+          background:black;
+          }

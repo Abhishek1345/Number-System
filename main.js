@@ -1,4 +1,5 @@
 var ans=[];
+var toggle=0;
 const BIN=new Bin();
 const HEX=new Hex();
 const OCT=new Oct();
@@ -123,11 +124,11 @@ function Btn(){
        function getType(){
          var url=new URL(window.location.href);
          var type=url.searchParams.get("Type");
-         if(type==null || type.equalsIgnoreCase("Bin"))
+         if(type==null || type=="Bin")
          return BIN;
-         else if(type.equalsIgnoreCase("Oct"))
+         else if(type=="Oct")
          return OCT;
-         else if(type.equalsIgnoreCase("Hex"))
+         else if(type=="Hex")
          return HEX;
          }
        
@@ -157,8 +158,20 @@ function Btn(){
                 btn.inp=input;
                 btn.num=i;
                 btn.div=document.createElement("div");
+                btn.div.id="result";
                 document.body.appendChild(btn.div);
                 document.body.appendChild(document.createElement("br"));
                 }
                 })();
-               
+                
+                $("i").click(()=>{
+                 $("#options").slideToggle(1000);
+                  if(toggle==0){
+                  document.getElementsByTagName("i")[0].className="fas fa-times";
+                  toggle++;
+                  }
+                  else{
+                   document.getElementsByTagName("i")[0].className="fas fa-bars";
+                 toggle--;
+                 }
+                  });

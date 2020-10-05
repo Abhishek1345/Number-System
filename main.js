@@ -211,7 +211,7 @@ function Btn(){
              ul.appendChild(li);
              
              }
-             })(getType(),"x");
+             })(getType(),getOp());
              
            
               

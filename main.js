@@ -155,7 +155,7 @@ function Btn(){
       
       function getOp(){
         var url=new URL(window.location.href);
-        var op=url.searchParams.get("Op")
+        var op=url.searchParams.get("Op");
         if(op==null)
         return "+";
         

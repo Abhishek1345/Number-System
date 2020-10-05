@@ -176,13 +176,8 @@ function Btn(){
        
        (function generateSums(Type,op){
          var b=Type;
-         for(var i=1;i<=5;i++){
-             var ul=document.getElementsByTagName("ul")[0];
-             var li=document.createElement("li");
-             var term1=b.generate();
-             var term2=b.generate();
-             var ques;
-             if(op=="add")
+          
+        if(op=="add")
              op="+";
              else if(op=="mul")
              op="x";
@@ -190,6 +185,14 @@ function Btn(){
              op="-";
              else
              op="+";
+
+         for(var i=1;i<=5;i++){
+             var ul=document.getElementsByTagName("ul")[0];
+             var li=document.createElement("li");
+             var term1=b.generate();
+             var term2=b.generate();
+             var ques;
+             
              if(op=="+"){
               ques=term1+op+term2+"\n";
              ans[i-1]=b.add(term1,term2);

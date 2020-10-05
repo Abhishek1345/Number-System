@@ -3,11 +3,6 @@ var toggle=0;
 const BIN=new Bin();
 const HEX=new Hex();
 const OCT=new Oct();
-function alertDiv(id){
-  document.getElementById(id).style.display="inline-flex";
-  
-  }
-   
 function Bin(){
 this.base=2;
 this.generate=function(){
@@ -41,6 +36,28 @@ this.generate=function(){
     var sum=a+b;
     return this.fromDec(sum);
     }
+    
+    this.subtract=function(bin1,bin2){
+      var a=this.toDec(bin1);
+      var b=this.toDec(bin2);
+      var sub=a-b;
+      return this.fromDec(sub);
+      }
+      
+      this.multiply=function(bin1,bin2){
+        var a=this.toDec(bin1);
+        var b=this.toDec(bin2);
+        var prod=a*b;
+        return this.fromDec(prod);
+        }
+        
+        this.divide=function(bin1,bin2){
+          var a=this.toDec(bin1);
+          var b=this.toDec(bin2);
+          var quo=a/b;
+          var rem=a%b;
+          return [this.fromDec(quo),this.fromDec(rem)];
+          }
     }
     
 function Oct(){
@@ -66,6 +83,12 @@ function Oct(){
           this.add=function(oct1,oct2){
             return BIN.add.call(this,oct1,oct2);
             }
+            this.subtract=function(oct1,oct2){
+              return BIN.subtract.call(this,oct1,oct2);
+              }
+            this.multiply=function(oct1,oct2){
+              return BIN.multiply.call(this,oct1,oct2);
+              }
       }
 function Hex(){
     this.base=16;
@@ -91,6 +114,13 @@ function Hex(){
       this.add=function(hex1,hex2){
              return BIN.add.call(this,hex1,hex2);
               }
+              
+        this.subtract=function(hex1,hex2){
+          return BIN.subtract.call(this,hex1,hex2);
+          }
+        this.multiply=function(hex1,hex2){
+          return BIN.multiply.call(this,hex1,hex2);
+          }
         }
         
 function Btn(){
@@ -105,7 +135,7 @@ function Btn(){
   this.butt.onclick=()=>{
     var a=this.inp.value;
     if(a.startsWith("0"))
-    a=a.slice(a.search(/\B[1-9]|[A-Z]/));
+    a=a.slice(a.search(/\B[1-9]|[A-Z]/i));
     
     if(a.toUpperCase()==ans[this.num]){
     this.div.className="alert alert-success";
@@ -122,6 +152,17 @@ function Btn(){
     
   document.body.appendChild(this.butt);
   }
+      
+      function getOp(){
+        var url=new URL(window.location.href);
+        var op=url.searchParams.get("Op")
+        if(op==null)
+        return "+";
+        
+        return op;
+        }
+      
+  
        function getType(){
          var url=new URL(window.location.href);
          var type=url.searchParams.get("Type");
@@ -133,21 +174,44 @@ function Btn(){
          return HEX;
          }
        
-       (function generateSums(Type){
+       (function generateSums(Type,op){
          var b=Type;
          for(var i=1;i<=5;i++){
              var ul=document.getElementsByTagName("ul")[0];
              var li=document.createElement("li");
              var term1=b.generate();
              var term2=b.generate();
-             
-             var ques=term1+"+"+term2+"\n";
+             var ques;
+             if(op=="add")
+             op="+";
+             else if(op=="mul")
+             op="x";
+             else if(op=="sub")
+             op="-";
+             else
+             op="+";
+             if(op=="+"){
+              ques=term1+op+term2+"\n";
+             ans[i-1]=b.add(term1,term2);
+             }
+             else if(op=="-"){
+               var max=(b.toDec(term1)>b.toDec(term2))? term1:term2;
+               var min=(b.toDec(term1)<b.toDec(term2))? term1:term2;
+               ques=max+op+min+"\n";
+               ans[i-1]=b.subtract(max,min);
+               }
+               
+              else if(op=="x"){
+              ques=term1+op+term2+"\n";
+              ans[i-1]=b.multiply(term1,term2);
+              }
+               
              ques=document.createTextNode(ques);
              li.appendChild(ques);
              ul.appendChild(li);
-             ans[i-1]=b.add(term1,term2);
+             
              }
-             })(getType());
+             })(getType(),"x");
              
            
               
